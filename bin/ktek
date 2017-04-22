@@ -1,21 +1,9 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-    ncp = require('ncp').ncp,
-    marked = require('marked'),
-    mustache = require('mustache'),
-    fs = require('fs'),
-    path = require('path'),
-    request = require('request');
+var program = require('commander');
 
-var initCommand = require('../lib/init');
-
-// Synchronous highlighting with highlight.js
-marked.setOptions({
-  highlight: function (code) {
-    return require('highlightjs').highlightAuto(code).value;
-  }
-});
+var initCommand = require('../lib/init'),
+    buildCommand = require('../lib/build');
 
 program
   .version('0.0.1')
@@ -23,32 +11,9 @@ program
   .description('Create a new empty book project in the current location')
   .action(initCommand);
 
-var chapterTemplate = fs.readFileSync(path.resolve(__dirname, '../lib/chapter.mustache.html'), 'utf8');
-
 program
   .command('build')
   .description('Compile the project to Kindle format')
-  .action(function (options) {
-    fs.readdir('.', function (err, files) {
-      files.forEach(function (file) {
-        if (file.substring(file.length - 3) === '.md') {
-          console.log('Compiling', file, '...');
-          fs.readFile(file, 'utf8', function (err, content) {
-            var templateData = {
-              title: 'Root Scootin Boogie',
-              content: marked(content),
-              stylesheets: [
-                '<link rel="stylesheet" href="highlight-theme.css" />'
-              ]
-            };
-            fs.writeFile(file.replace('.md', '.html'), mustache.render(chapterTemplate, templateData), function (err) {
-              if (err) throw err;
-              console.log('Wrote', file);
-            })
-          })
-        }
-      })
-    })
-  });
+  .action(buildCommand);
 
 program.parse(process.argv);
