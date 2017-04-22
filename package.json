@@ -1,0 +1,23 @@
+{
+  "name": "ktek",
+  "version": "1.0.0",
+  "description": "A tool for generating Amazon Kindle-compatible HTML from markdown",
+  "main": "bin/ktek",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "highlightjs": "^9.10.0",
+    "marked": "^0.3.6",
+    "mustache": "^2.3.0",
+    "ncp": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "preferGlobal": true,
+  "bin": {
+    "ktek": "bin/ktek"
+  }
+}
