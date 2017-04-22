@@ -13,14 +13,14 @@
 		</dc-metadata>
 	</metadata>
 	<manifest>
-		<item id="content" media-type="text/x-oeb1-document" href="Table of Contents.html"></item>
-		<item id="chapter1" media-type="text/x-oeb1-document" href="Chapter One.html"></item>
+		<item id="content" media-type="text/x-oeb1-document" href="table-of-contents.html"></item>
+		<item id="chapter1" media-type="text/x-oeb1-document" href="chapter-one.html"></item>
 	</manifest>
 	<spine>
 
 	</spine>
 	<guide>
-		<reference type="toc" title="Table of Contents" href="Table of Contents.html"/>
-		<reference type="text" title="Chapter One" href="Chapter One.html"/>
+		<reference type="toc" title="Table of Contents" href="table-of-contents.html"/>
+		<reference type="text" title="Chapter One" href="chapter-one.html"/>
 	</guide>
 </package>

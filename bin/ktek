@@ -5,7 +5,10 @@ var program = require('commander'),
     marked = require('marked'),
     mustache = require('mustache'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    request = require('request');
+
+var initCommand = require('../lib/init');
 
 // Synchronous highlighting with highlight.js
 marked.setOptions({
@@ -18,15 +21,7 @@ program
   .version('0.0.1')
   .command('init [name]')
   .description('Create a new empty book project in the current location')
-  .action(function (name, options) {
-    var templateDir = path.resolve(__dirname, '../templates/default');
-
-    console.log(templateDir);
-
-    ncp(templateDir, "./"+name, function (err) {
-      if (err) throw err;
-    });
-  });
+  .action(initCommand);
 
 var chapterTemplate = fs.readFileSync(path.resolve(__dirname, '../lib/chapter.mustache.html'), 'utf8');
 
@@ -41,7 +36,10 @@ program
           fs.readFile(file, 'utf8', function (err, content) {
             var templateData = {
               title: 'Root Scootin Boogie',
-              content: marked(content)
+              content: marked(content),
+              stylesheets: [
+                '<link rel="stylesheet" href="highlight-theme.css" />'
+              ]
             };
             fs.writeFile(file.replace('.md', '.html'), mustache.render(chapterTemplate, templateData), function (err) {
               if (err) throw err;
