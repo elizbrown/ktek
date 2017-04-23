@@ -1,0 +1,7 @@
+title: KTEK Default project
+language: en
+creator: Tim Lebel
+copyrights: Tim Lebel
+publisher: Tim Lebel
+manifest:
+  - chapter-one.md

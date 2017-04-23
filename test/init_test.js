@@ -6,7 +6,7 @@ describe('Init command', function () {
   it('Should create the template project', function (done) {
     initCommand('__test', {}, function (err) {
       assert.isNotOk(err, 'Did not produce an error');
-      assert.isOk(fs.existsSync('__test/book.opf'), 'The book.opf file exists');
+      assert.isOk(fs.existsSync('__test/book.yml'), 'The book.yml file exists');
       done();
     });
   });
