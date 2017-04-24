@@ -22,6 +22,10 @@ describe('OPF generator', function () {
   });
 
   it('Should process valid YAML manifest', function (done) {
-    opf.parseFile('templates/default', 'book.yml', done);
+    opf.parseFile('templates/default', 'book.yml', function (err, compiled) {
+      assert.isNotOk(err, 'Did not produce an error');
+      assert.isOk(compiled, 'Produced an XML document');
+      done();
+    });
   });
 });
